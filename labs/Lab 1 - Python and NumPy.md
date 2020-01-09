@@ -60,6 +60,7 @@ a
 ```python
 b = np.full(shape=(6,4), fill_value=1)
 np.fill_diagonal(b, 3)
+# b[range(4), range(4)] = 3
 b
 ```
 
@@ -129,6 +130,7 @@ assert count_ones_loop([1, 2, 3, 1]) == 2
 def count_ones_where(arr_like):
     arr = np.array(arr_like)
     return np.where(arr==1, arr, 0).sum()
+
 assert count_ones_where([1, 2, 3, 1]) == 2, "Oh no"
 assert count_ones_where([2, 3, 4]) == 0, "Oh no x2"
 ```
@@ -153,6 +155,7 @@ Repeat exercise A.2 using a DataFrame instead.
 b_np = np.full(shape=(6,4), fill_value=1)
 np.fill_diagonal(b_np, 3)
 b = pd.DataFrame(b_np)
+# b.iloc[range(4), range(4)] = 3
 b
 ```
 
@@ -178,7 +181,7 @@ def count_ones_loop(df):
     count = 0
     for row_index, columns in df.iterrows():
         for col_index in columns:
-            if df[col_index][row_index] == 1:
+            if df.iloc[col_index][row_index] == 1:
                 count = count + 1
     return count
 
